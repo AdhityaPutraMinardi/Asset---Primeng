@@ -1,0 +1,3 @@
+export enum AssetTypeEnum{
+    ASSET_GENERAL = '1311', LICENSES = '1312',COMPONENT = '1313',CONSUMABLES='1314'
+}

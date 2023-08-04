@@ -1,0 +1,69 @@
+<div class="container mt-3">
+    <h3>Invoice Data</h3>
+    <div class="table-responsive">
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Invoice Number</th>
+                    <th scope="col">Supplier</th>
+                    <th scope="col">Picture</th>
+                    <th scope="col" colspan="2">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of invoices ; let f = index">
+                    <th scope="row">{{f+1}}</th>
+                    <td>{{i.invoiceNumber}}</td>
+                    <td>{{i.supplier}}</td>
+                    <td><img src="http://localhost:8080/files/{{i.fileId}}" alt="invoice-berkat" class="img-thumbnail"></td>
+                    <td>
+                        <button class="btn btn-secondary me-1" data-bs-target="#update"
+                            data-bs-toggle="modal" (click)="updateClick(i.id)">Update</button>
+                        <a routerLink="/invoice/detail/1"  (click)="onClick(i.invoiceNumber)" class="btn btn-secondary">Details</a>
+                    </td>
+
+                </tr>
+              
+            </tbody>
+        </table>
+    </div>
+    <a class="btn btn-primary mt-1  mb-2" routerLink="/invoice/new">Create</a>
+</div>
+<div class="modal fade" id="update" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Update Invoice</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form class="mt-3" [formGroup]="invoiceUpdateReqDto" (ngSubmit)="onUpdate()">
+                    <div class="row gy-md-3 mb-3">
+                        <div class="col-md-2">
+                            <label for="supplier" class="form-label">Supplier<span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-md-10">
+                            <select class="form-select" id="supplier" formControlName="supplierId" required>
+                                <option *ngFor="let s of supplier" value={{s.id}} selected> {{s.supplierName}} </option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="invoice-picture">Picture<span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="file" class="form-control" id="invoice-picture" (change)="fileUpload($event)" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal">Update</button>
+                        <a class="btn btn-secondary " data-bs-dismiss="modal">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

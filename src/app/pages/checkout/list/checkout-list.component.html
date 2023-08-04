@@ -1,0 +1,34 @@
+
+    <div class="container mt-3">
+        <h3>Check Out Data</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Check Out Code</th>
+                        <th scope="col">Employee</th>
+                        <th scope="col">Asset General</th>
+                        <th scope="col">Place</th>
+                        <th scope="col">Option</th>
+                   
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let c of checkOut ; let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{c.checkOutCode}}</td>
+                        <td>{{c.employee}}</td>
+                        <td>{{c.assetGeneral}}</td>
+                        <td>{{c.place}}</td>
+                        <td><a  class="btn btn-secondary" (click)="onClick(c.id)">Details</a></td>
+                      
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+        <a class="btn btn-primary" routerLink="/checkout/new">Check Out</a>
+    </div>
+
+\

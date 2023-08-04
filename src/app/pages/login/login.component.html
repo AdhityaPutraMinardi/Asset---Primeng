@@ -1,0 +1,39 @@
+<!-- <pre>{{ loginReqDto.value | json }}</pre> -->
+<!-- <h1 *ngIf="heading">Sanji</h1> -->
+<!-- <button (click)="showHeading()">{{Hide}}</button> -->
+<!-- <button (click)="showHeading()">Hide</button> -->
+<!-- <h1>{{ data | json }}</h1>
+<h1 class="{{heading}}">{{fullName}}</h1>
+<h1 [class]="heading">{{fullName}}</h1>
+<h1 class="heading" (click)="clickMe()">{{fullName}}</h1>
+<h1>{{count}}</h1> -->
+<!-- <input type="text" [formControl]="fullName2"> -->
+
+<div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
+    <form [formGroup] = 'loginReqDto' (ngSubmit)="onLogin()" class="mt-3">
+        <h3 class="text-center mb-3">Login</h3>
+        <div class="row gy-md-3 m-3">
+            <div class="col-12 col-md-12">
+                <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+            </div>
+            <div class="col-12 col-md-12">
+                <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="userEmail" required>
+            </div>
+            <div class="col-12 col-md-12">
+                <label for="select">Password<span class="text-danger">*</span></label>
+            </div>
+            <div class="col-12 col-md-12">
+                <input type="password" class="form-control" id="password" placeholder="Password" formControlName="userPassword" required>
+            </div>
+            <div class="col-12">
+                <button *ngIf="!loading" type="submit" [disabled] = "loginReqDto.invalid" class="btn btn-primary mt-2">Login</button>
+                
+                <button class="btn btn-primary" *ngIf="loading" type="button" disabled>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Loading...
+                  </button>
+            </div>
+
+        </div>
+    </form>
+</div>

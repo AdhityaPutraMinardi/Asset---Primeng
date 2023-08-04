@@ -1,0 +1,43 @@
+<div class="container">
+    <form class="mt-3" [formGroup]="assetReqDto" (ngSubmit)="onSubmit()">
+        <h3>Create Asset</h3>
+        <div class="row gy-md-3 mt-1">
+            <div class="col-md-2">
+                <label for="asset" class="form-label">Item Name<span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-10">
+                <select class="form-select" id="asset" formControlName="invoiceAssetDetail" required>
+                    <option *ngFor="let u of unassignedItem" value={{u.id}} selected>{{u.assetName}}</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="type" class="form-label">Type<span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-10">
+                <select class="form-select" id="type" formControlName="assetTypeId" required>
+                    <option *ngFor="let t of assetType" value={{t.id}} selected>{{t.assetTypeName}}</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-10">
+                <select class="form-select" id="status" formControlName="assetStatusId" required>
+                    <option *ngFor="let s of assetStatus" value={{s.id}} selected>{{s.statusName}}</option>
+
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="asset-picture">Asset Picture<span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-10">
+                <input type="file" class="form-control" id="asset-picture" (change)="fileUpload($event)" required>
+            </div>
+            <div class="col-md-4 mt-3 mb-3">
+                <button type="submit" class="btn btn-primary me-1">Create</button>
+                <a class="btn btn-secondary" routerLink="../">Cancel</a>
+            </div>
+        </div>
+
+    </form>
+</div>

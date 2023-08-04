@@ -1,0 +1,94 @@
+<pre>
+    {{checkOutReqDto.value | json}}
+</pre>
+
+<div class="container  mt-3">
+    <form [formGroup]="checkOutReqDto" (ngSubmit)="onSubmit()">
+        <h3>Check Out Form</h3>
+        <div class="row  gy-md-3 mt-1">
+            <div class="col-md-2">
+                <label for="checkout-to" class="form-label">Check Out To<span class="text-danger">*</span> : </label>
+            </div>
+            <div class="col-md-10">
+                <select class="form-select" id="checkout-to" (change)="onChange($event)" required>
+                    <option value="" selected> - Select - </option>
+                    <option value="Employee">Employee</option>
+                    <option value="Asset General">Asset General</option>
+                    <option value="Place">Place</option>
+
+                </select>
+            </div>
+            <div id="checkOutReq" formGroupName="checkOutReq">
+                <div class="row" *ngIf="isEmployee">
+                    <div class="col-md-2">
+                        <label for="employee" class="form-label">Employee<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-10">
+                        <select class="form-select" id="employee" formControlName="employeeId">
+                            <option value="" selected> None </option>
+                            <option *ngFor="let e of employee" value={{e.id}}> {{e.employeeName}} </option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="row" *ngIf="isAssetGeneral">
+                    <div class="col-md-2">
+                        <label for="general" class="form-label">Asset General<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-10">
+                        <select class="form-select" id="general" formControlName="assetGeneralId">
+                            <option value="" selected> None </option>
+                            <option *ngFor="let ag of assetGeneral" value={{ag.id}}> {{ag.assetName}} </option>
+                          
+                        </select>
+                    </div>
+                </div>
+                <div class="row" *ngIf="isPlace">
+                    <div class="col-md-2">
+                        <label for="place" class="form-label">Place<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="place" formControlName="place" value="">
+                    </div>
+                </div>
+            </div>
+            <h3>Details <button type="button" class="btn btn-secondary" (click)="onAdd()">Add</button></h3>
+
+            <div class="card" *ngFor="let d of detailReq.controls; let i = index " formArrayName="checkOutDetailReqDto">
+                <div class="detail row gy-md-3" >
+                    <h3 class="card-header">Detail</h3>
+                    <div class="card-body m-2">
+                        <div class="detail row gy-md-3"[formGroupName]="i">
+                            <div class="col-md-2">
+                                <label for="asset" class="form-label">Asset <span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-select" id="asset" formControlName="assetId" required>
+                                    <option value="" selected> None </option>
+                                    <option *ngFor="let a of asset" value={{a.id}}> {{a.assetName}} </option>
+
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="return-date" class="form-label">Return Date</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="datetime-local"  formControlName="returnDate" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer mt-1">
+
+                        <button type="button" class="btn btn-danger float-end" (click)="remove(i)">Delete</button>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-3 mb-3">
+            <button type="submit" class="btn btn-primary me-1">Submit</button>
+            <a class="btn btn-secondary" routerLink="../">Cancel</a>
+        </div>
+    </form>
+</div>

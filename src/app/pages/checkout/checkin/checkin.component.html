@@ -1,0 +1,42 @@
+<div class="container mt-3">
+    <form [formGroup]="checkInReqDto" (ngSubmit)="onSubmit()">
+        <h3>Check In Form</h3>
+        <div class="row gy-md-3 mt-1">
+            <div class="col-md-2">
+                <label for="code" class="form-label">Check Out Code</label>
+            </div>
+            <div class="col-md-10">
+                <select class="form-select" id="code" (change)="onChange()" formControlName="checkOutId">
+                    <option *ngFor="let a of checkOut" value={{a.id}}  selected> {{a.checkOutCode}} </option>
+                  
+                </select>
+            </div>
+        </div>
+        <h3 class="mt-3">Detail <button type="button" class="btn btn-secondary" (click)="onAdd()">Add</button></h3>
+        <div id="checkin d-flex justify-content-center align-items-center">
+            <div class="card" *ngFor="let c of checkInReq.controls; let i = index" formArrayName="checkIn" >
+                <h3 class="card-header">Assets</h3>
+     
+                    <div class="card-body ms-1">
+                        <div class="row gy-md-3 mt-1" >
+                        <div class="col-md-2">
+                            <label for="asset" class="form-label">Asset<span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-md-10">
+                            <select class="form-select" id="asset" [formControlName]="i">
+                                <option *ngFor="let c of checkOutDetail" value={{c.id}} selected> {{c.assetName}} </option>
+                             
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-danger float-end" (click)="onRemove(i)">Delete</button>
+                    </div>
+                
+            </div>
+            <button type="submit" class="btn btn-primary m-2">Check In</button>
+            <a class="btn btn-secondary" routerLink="../">Cancel</a>
+        </div>
+    </form>
+</div>

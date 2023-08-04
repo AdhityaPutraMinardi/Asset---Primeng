@@ -1,0 +1,105 @@
+<div class="profile container mt-3 ">
+    <h2>Profile</h2>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 ">
+            <img *ngIf="user" src="http://localhost:8080/files/{{user.fileId}}"  alt="foto-diri" id="profile-picture"
+                style="height: 30rem; width: 30rem; border-radius: 10%; object-fit: cover;" class="img-thumbnail">
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>User Email</strong>
+                  
+                </div>
+                <div class="col-md-9">
+                    <p>{{user?.userEmail}}</p>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-3">
+                    <strong>User Name</strong>
+                </div>
+                <div class="col-md-9">
+                    <p>{{user?.userName}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Role</strong>
+                </div>
+                <div class="col-md-9">
+                    <p>{{user?.roleName}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Address</strong>
+                </div>
+                <div class="col-md-9">
+                    <p>{{user?.userAddress}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Company</strong>
+                </div>
+                <div class="col-md-9">
+                    <p>{{user?.companyName}}</p>
+                </div>
+            </div>
+            <div class="row pb-3">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary" data-bs-target="#update"
+                        data-bs-toggle="modal">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="update" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Update</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="update-profile-form" [formGroup]="userReqDto" (ngSubmit)="onSubmit()">
+                    <h3>Update Profile</h3>
+                    <div class="row align-items-center gy-md-3 m-3">
+                        <div class="col-md-4">
+                            <label for="email">Email<span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="email" class="form-control" id="email" value={{user?.userEmail}} disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="user-name">User Name<span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="user-name" value={{user?.userName}} formControlName="userName">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="user-address">User Address<span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <textarea class="form-control" id="user-address" value={{user?.userAddress}} formControlName="userAddress"></textarea>
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <label for="user-picture">Picture<span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="file" class="form-control" id="user-picture" (change)="fileUpload($event)">
+                        </div>
+                        </div>
+                    
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal">Update</button>
+                            <a class="btn btn-secondary " data-bs-dismiss="modal">Cancel</a>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
